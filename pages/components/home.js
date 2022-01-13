@@ -8,21 +8,26 @@ import MainDetails from "./MainDetails";
 import ClientDetails from "./ClientDetails";
 import Dates from "./Dates";
 import { Input } from "postcss";
+import TableForm from "./TableForm";
 
 function Main() {
-  const [showInvoice, setShowInvoice] = useState(false);
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [bankName, setBankName] = useState("");
-  const [bankAccount, setBankAccount] = useState("");
-  const [website, setWebsite] = useState("");
-  const [clientName, setClientName] = useState("");
-  const [clientAddress, setClientAddress] = useState("");
-  const [invoiceNumber, setInvoiceNumber] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [invoiceDate, setInvoiceDate] = useState("");
+  const [showInvoice, setShowInvoice] = useState(true);
+  const [name, setName] = useState("Sambulo Senda");
+  const [address, setAddress] = useState("49 west street");
+  const [email, setEmail] = useState("sambulosendas@gmail.com");
+  const [phone, setPhone] = useState("0783456789");
+  const [bankName, setBankName] = useState("Baclays");
+  const [bankAccount, setBankAccount] = useState("932038392");
+  const [website, setWebsite] = useState("sambulosendas.com");
+  const [clientName, setClientName] = useState("Ben moyo Senda");
+  const [clientAddress, setClientAddress] = useState("sam@gmail.com");
+  const [invoiceNumber, setInvoiceNumber] = useState("32932");
+  const [dueDate, setDueDate] = useState("20/12/2020");
+  const [invoiceDate, setInvoiceDate] = useState("20/12/2020");
+  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [unitPrice, setUnitPrice] = useState("");
+  const [amount, setAmount] = useState("");
 
   const [notes, setNotes] = useState("");
 
@@ -38,7 +43,7 @@ function Main() {
             <Header handlePrint={handlePrint} />
             <MainDetails name={name} address={address} />
 
-            <ClienteDetails
+            <ClientDetails
               clientName={clientName}
               clientAddress={clientAddress}
             />
@@ -49,7 +54,7 @@ function Main() {
               dueDate={dueDate}
             />
 
-            <Table />
+            <Table description={description} />
 
             <Notes notes={notes} />
 
@@ -248,9 +253,8 @@ function Main() {
                     value={invoiceNumber}
                     onChange={(e) => setInvoiceNumber(e.target.value)}
                   />
-
-</div>
-<div className="flex flex-col">
+                </div>
+                <div className="flex flex-col">
                   <label htmlFor="invoiceDate" className="font-bold">
                     {" "}
                     Invoice Date{" "}
@@ -265,8 +269,8 @@ function Main() {
                     value={invoiceDate}
                     onChange={(e) => setInvoiceDate(e.target.value)}
                   />
-</div>
-<div className="flex flex-col">
+                </div>
+                <div className="flex flex-col">
                   <label htmlFor="dueDate" className="font-bold">
                     {" "}
                     Due Date{" "}
@@ -284,7 +288,11 @@ function Main() {
                 </div>
               </article>
 
-              <label htmlFor="dueDate" className="font-bold">
+              <article>
+                <TableForm description={description} setDescription={setDescription} />
+              </article>
+
+              <label htmlFor="additionalInfo" className="font-bold">
                 {" "}
                 Additional Notes{" "}
               </label>
