@@ -1,4 +1,4 @@
-export default function Table({description}) {
+export default function Table({description, quantity, unitPrice, amount}) {
     return (
         <>
         <table width="100%" className="mt-10">
@@ -15,9 +15,9 @@ export default function Table({description}) {
             <tbody>
                 <tr>
                 <td>{description}</td>
-                  <td>20</td>
-                  <td>500</td>
-                  <td>10000</td>
+                  <td>{quantity}</td>
+                  <td>{unitPrice}</td>
+                  <td>{amount}</td>
                 </tr>
                 </tbody>
     

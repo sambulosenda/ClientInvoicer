@@ -7,7 +7,6 @@ import Header from "./Header";
 import MainDetails from "./MainDetails";
 import ClientDetails from "./ClientDetails";
 import Dates from "./Dates";
-import { Input } from "postcss";
 import TableForm from "./TableForm";
 
 function Main() {
@@ -54,7 +53,7 @@ function Main() {
               dueDate={dueDate}
             />
 
-            <Table description={description} />
+            <Table description={description} quantity={quantity}  unitPrice={unitPrice} amount={amount}  />
 
             <Notes notes={notes} />
 
@@ -289,7 +288,18 @@ function Main() {
               </article>
 
               <article>
-                <TableForm description={description} setDescription={setDescription} />
+                <TableForm 
+                description={description}
+                 setDescription={setDescription}
+                 quantity={quantity}
+                 setQuantity={setQuantity}
+                 unitPrice={unitPrice}
+                 setUnitPrice={setUnitPrice}
+                 amount={amount}
+                 setAmount={setAmount}
+                 
+                 
+                 />
               </article>
 
               <label htmlFor="additionalInfo" className="font-bold">
