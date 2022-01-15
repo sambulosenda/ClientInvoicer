@@ -27,6 +27,7 @@ function Main() {
   const [quantity, setQuantity] = useState("");
   const [unitPrice, setUnitPrice] = useState("");
   const [amount, setAmount] = useState("");
+  const [list, setList] = useState([]);
 
   const [notes, setNotes] = useState("");
 
