@@ -298,6 +298,8 @@ function Main() {
                  setUnitPrice={setUnitPrice}
                  amount={amount}
                  setAmount={setAmount}
+                 list={list}
+                 setList={setList}
                  
                  
                  />

@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function TableForm({
   description,
@@ -9,11 +10,27 @@ export default function TableForm({
   setUnitPrice,
   amount,
   setAmount,
+  setList,
+  list,
 }) {
   const handlesubmit = (e) => {
     e.preventDefault();
-    console.log(description, quantity, unitPrice, amount);
+
+    const newItems = {
+      id: uuidv4(),
+      description,
+      quantity,
+      unitPrice,
+      amount,
+    };
+    setDescription("");
+    setQuantity("");
+    setUnitPrice("");
+    setAmount("");
+    setList([...list, newItems]);
+  
   };
+
   useEffect(() => {
     const calculateAmount = (amount) => {
       setAmount(quantity * unitPrice);
@@ -75,6 +92,19 @@ export default function TableForm({
           Add Table Item
         </button>
       </form>
+
+      <section>
+        <ul>
+          {list.map(({ id, description, quantity, unitPrice, amount }) => (
+            <React.Fragment key={id}>
+              <li> {description} </li>
+              <li> {quantity} </li>
+              <li> {unitPrice} </li>
+              <li> {amount} </li>
+            </React.Fragment>
+          ))}
+        </ul>
+      </section>
     </>
   );
 }

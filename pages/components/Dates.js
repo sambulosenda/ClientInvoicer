@@ -16,7 +16,6 @@ export default function Dates({invoiceNumber, invoiceDate, dueDate}) {
             </li>
           </ul>
         </section>
-
         {/* End of dates */}
         </div>
     )
