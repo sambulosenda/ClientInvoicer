@@ -28,6 +28,7 @@ function Main() {
   const [unitPrice, setUnitPrice] = useState("");
   const [amount, setAmount] = useState("");
   const [list, setList] = useState([]);
+  const [total, setTotal] = useState(0);
 
   const [notes, setNotes] = useState("");
 
@@ -54,7 +55,16 @@ function Main() {
               dueDate={dueDate}
             />
 
-            <Table description={description} quantity={quantity}  unitPrice={unitPrice} amount={amount}  />
+            <Table
+              description={description}
+              quantity={quantity}
+              unitPrice={unitPrice}
+              amount={amount}
+              list={list}
+              setList={setList}
+              total={total}
+              setTotal={setTotal}
+            />
 
             <Notes notes={notes} />
 
@@ -289,20 +299,20 @@ function Main() {
               </article>
 
               <article>
-                <TableForm 
-                description={description}
-                 setDescription={setDescription}
-                 quantity={quantity}
-                 setQuantity={setQuantity}
-                 unitPrice={unitPrice}
-                 setUnitPrice={setUnitPrice}
-                 amount={amount}
-                 setAmount={setAmount}
-                 list={list}
-                 setList={setList}
-                 
-                 
-                 />
+                <TableForm
+                  description={description}
+                  setDescription={setDescription}
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                  unitPrice={unitPrice}
+                  setUnitPrice={setUnitPrice}
+                  amount={amount}
+                  setAmount={setAmount}
+                  list={list}
+                  setList={setList}
+                  total={total}
+                  setTotal={setTotal}
+                />
               </article>
 
               <label htmlFor="additionalInfo" className="font-bold">

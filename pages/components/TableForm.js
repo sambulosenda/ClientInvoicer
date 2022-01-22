@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
 
 export default function TableForm({
@@ -12,7 +13,11 @@ export default function TableForm({
   setAmount,
   setList,
   list,
+  total,
+  setTotal,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+
   const handlesubmit = (e) => {
     e.preventDefault();
 
@@ -28,8 +33,10 @@ export default function TableForm({
     setUnitPrice("");
     setAmount("");
     setList([...list, newItems]);
-  
+    setIsEditing(false);
   };
+
+  //edit function
 
   useEffect(() => {
     const calculateAmount = (amount) => {
@@ -37,6 +44,34 @@ export default function TableForm({
     };
     calculateAmount(amount);
   }, [amount, quantity, unitPrice]);
+
+  //calculate total amount of Items in the list
+useEffect( () => {
+
+  let rows = document.querySelectorAll(".amount");
+  let sum = 0;
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i].className === "amount") {
+      sum += isNaN(rows[i].innerHTML) ? 0 : parseInt(rows[i].innerHTML);
+      setTotal(sum);
+    }
+  }
+
+}, [])
+  //edit function
+  const editRow = (id) => {
+    const editingRow = list.find((item) => item.id === id);
+    setList(list.filter((item) => item.id !== id));
+    setIsEditing(true);
+    setDescription(editingRow.description);
+    setQuantity(editingRow.quantity);
+    setUnitPrice(editingRow.unitPrice);
+  };
+
+  // delate button
+  const DeleteRow = (id) => {
+    setList(list.filter((item) => item.id !== id));
+  };
 
   return (
     <>
@@ -89,21 +124,50 @@ export default function TableForm({
           className="bg-blue-500 py-2 mb-5  px-8 font-bold rounded shadow border-2 border-blue-500 text-white hover:bg-transparent hover:text-blue-500 transition-all duration-300"
           type="submit"
         >
-          Add Table Item
+          {isEditing ? "Editing" : "Add Table item"}{" "}
         </button>
       </form>
 
       <section>
-        <ul>
+        <table width="100%" className="mt-10 mb-10">
+          <thead>
+            <tr className="bg-gray-100 p-1">
+              <td>Description</td>
+              <td>Quality</td>
+              <td>Price</td>
+              <td>Amount</td>
+            </tr>
+          </thead>
           {list.map(({ id, description, quantity, unitPrice, amount }) => (
             <React.Fragment key={id}>
-              <li> {description} </li>
-              <li> {quantity} </li>
-              <li> {unitPrice} </li>
-              <li> {amount} </li>
+              <tbody>
+                <tr>
+                  <td>{description}</td>
+                  <td>{quantity}</td>
+                  <td>{unitPrice}</td>
+                  <td className="amount">{amount}</td>
+                  <td>
+                    <button onClick={() => DeleteRow(id)}>
+                      <AiOutlineDelete className="text-red-500 font-bold" />
+                    </button>
+                  </td>
+                  <td>
+                    <button>
+                      <AiOutlineEdit
+                        className="text-blue-500 font-bold"
+                        onClick={() => editRow(id)}
+                      />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
             </React.Fragment>
           ))}
-        </ul>
+        </table>
+
+        <div>
+          <h2 className="font-bold">Total: £{total.toLocaleString()}</h2>
+        </div>
       </section>
     </>
   );
